@@ -12,8 +12,8 @@ Package.onUse(function(api) {
   api.export('CDN','client');
   api.use('webapp','server');
   api.use('browser-policy', {weak: true});
-  api.addFiles('lib/client.js','client');
-  api.addFiles('lib/server.js','server');
+  api.mainModule('lib/client.js','client');
+  api.mainModule('lib/server.js','server');
 });
 
 Package.onTest(function(api) {

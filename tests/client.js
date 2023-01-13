@@ -17,14 +17,14 @@ Tinytest.add(
   function (test) {
   	// Assume that the CDN_URL was set by the server
     __meteor_runtime_config__.CDN_URL = CDN;
-    const cssfile = "/somefile.css";
-    const relpath = Meteor._relativeToSiteRootUrl(cssfile);
-    test.equal(relpath, CDN+"somefile.css");
+    const cssfile1 = "/somefile.css";
+    const relpath1 = Meteor._relativeToSiteRootUrl(cssfile1);
+    test.equal(relpath1, CDN+"somefile.css");
 
     // Test that is also works with relative path css files
-    const cssfile = "/somepath/somefile.css";
-    const relpath = Meteor._relativeToSiteRootUrl(cssfile);
-    test.equal(relpath,CDN+"somepath/somefile.css");
+    const cssfile2 = "/somepath/somefile.css";
+    const relpath2 = Meteor._relativeToSiteRootUrl(cssfile2);
+    test.equal(relpath2,CDN+"somepath/somefile.css");
   }
 );
 
@@ -37,14 +37,14 @@ Tinytest.add(
   function (test) {
   	// Assume that the CDN_URL was set by the server
     __meteor_runtime_config__.CDN_URL = CDN;
-    const jsfile = "/somefile.js";
-    const relpath = Meteor._relativeToSiteRootUrl(jsfile);
-    test.equal(relpath,CDN+"somefile.js");
+    const jsfile1 = "/somefile.js";
+    const relpath1 = Meteor._relativeToSiteRootUrl(jsfile1);
+    test.equal(relpath1,CDN+"somefile.js");
 
     // Test that is also works with relative path css files
-    const jsfile = "/somepath/somefile.js";
-    const relpath = Meteor._relativeToSiteRootUrl(jsfile);
-    test.equal(relpath,CDN+"somepath/somefile.js");
+    const jsfile2 = "/somepath/somefile.js";
+    const relpath2 = Meteor._relativeToSiteRootUrl(jsfile2);
+    test.equal(relpath2,CDN+"somepath/somefile.js");
   }
 );
 
@@ -57,15 +57,15 @@ Tinytest.add(
   function (test) {
   	// Test with css file
     __meteor_runtime_config__.CDN_URL = CDN;
-    const cssfile = "/somefile.css?version=12";
-    const relpath = Meteor._relativeToSiteRootUrl(cssfile);
-    test.equal(relpath,CDN+"somefile.css?version=12");
+    const cssfile1 = "/somefile.css?version=12";
+    const relpath1 = Meteor._relativeToSiteRootUrl(cssfile1);
+    test.equal(relpath1,CDN+"somefile.css?version=12");
 
   	// Assume that the CDN_URL was set by the server
     __meteor_runtime_config__.CDN_URL = CDN;
-    const jsfile = "/somepath/somefile.js?version=13";
-    const relpath = Meteor._relativeToSiteRootUrl(jsfile);
-    test.equal(relpath,CDN+"somepath/somefile.js?version=13");
+    const jsfile2 = "/somepath/somefile.js?version=13";
+    const relpath2 = Meteor._relativeToSiteRootUrl(jsfile2);
+    test.equal(relpath2,CDN+"somepath/somefile.js?version=13");
 
   }
 );
@@ -79,15 +79,15 @@ Tinytest.add(
   function (test) {
   	// Test with no query string file
     __meteor_runtime_config__.CDN_URL = CDN;
-    const sockpath = "/sock/info";
-    const relpath = Meteor._relativeToSiteRootUrl(sockpath);
-    test.isTrue(relpath.indexOf(CDN) === -1);
+    const sockpath1 = "/sock/info";
+    const relpath1 = Meteor._relativeToSiteRootUrl(sockpath1);
+    test.isTrue(relpath1.indexOf(CDN) === -1);
 
   	// Test with no query string file
     __meteor_runtime_config__.CDN_URL = CDN;
-    const sockpath = "/sock/info?request=13";
-    const relpath = Meteor._relativeToSiteRootUrl(sockpath);
-    test.isTrue(relpath.indexOf(CDN) === -1);
+    const sockpath2 = "/sock/info?request=13";
+    const relpath2 = Meteor._relativeToSiteRootUrl(sockpath2);
+    test.isTrue(relpath2.indexOf(CDN) === -1);
   }
 );
 
