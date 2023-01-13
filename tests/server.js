@@ -1,8 +1,7 @@
-var url = Npm.require("url");
-var path = Npm.require("path");
+import url from "url";
+import path from "path";
 
-
-CONTROLLER = new CDN._controllerClass();
+const CONTROLLER = new CDN._controllerClass();
 
 // These tests directly influence the Meteor server that
 // is running them. Therefore the ROOT_URL and
@@ -17,10 +16,10 @@ function resetState(){
 Tinytest.add(
   'Server Side - CDN._validateSettings - valid settings',
   function (test) {
-    var result;
-    var cdn = "http://www.cloudfront.com/s9ufe3u2rns/";
-    var root1 = "https://www.meteor.com/e9043utosn/";
-    var root2 = "http://www.meteor.com/e9043utosn/";
+    const result;
+    const cdn = "http://www.cloudfront.com/s9ufe3u2rns/";
+    const root1 = "https://www.meteor.com/e9043utosn/";
+    const root2 = "http://www.meteor.com/e9043utosn/";
 
     result = CONTROLLER._validateSettings(root1,cdn);
     test.isTrue(result, "validateSettings should return True if the settings are valid");
@@ -121,9 +120,9 @@ Tinytest.add(
 
 
 // Create MOCK request objects
-var req = { headers: {}};
+const req = { headers: {}};
 
-var res = { status:0,
+const res = { status:0,
             headers: {},
             write: function(){},
             end: function(){},
@@ -135,9 +134,9 @@ var res = { status:0,
             }
           };
 
-var nextCalls = 0;
+const nextCalls = 0;
 
-var next = function(){
+const next = function(){
   nextCalls += 1;
 }
 
@@ -147,11 +146,10 @@ var next = function(){
 Tinytest.add(
   'Server Side - ROOT Serving - Return 200 for missing static',
   function (test) {
-    var status;
-    var cdn = "http://www.cloudfront.com/s9ufe3u2rns/";
-    var root = "http://www.meteor.com/e9043utosn/";
-    var staticUrl1 = root + "myimages.js";
-    var staticUrl2 = root + "images/myImage.js";
+    const cdn = "http://www.cloudfront.com/s9ufe3u2rns/";
+    const root = "http://www.meteor.com/e9043utosn/";
+    const staticUrl1 = root + "myimages.js";
+    const staticUrl2 = root + "images/myImage.js";
     CONTROLLER._setRootUrl(root);
     CONTROLLER._setCdnUrl(cdn);
 
@@ -176,9 +174,8 @@ Tinytest.add(
 Tinytest.add(
   'Server Side - ROOT Serving - Return 200 for valid page',
   function (test) {
-    var status;
-    var cdn = "http://www.cloudfront.com/";
-    var root = "http://www.meteor.com/";
+    const cdn = "http://www.cloudfront.com/";
+    const root = "http://www.meteor.com/";
     CONTROLLER._setRootUrl(root)
     CONTROLLER._setCdnUrl(cdn);
 
@@ -198,9 +195,8 @@ Tinytest.add(
 Tinytest.add(
   'Server Side - CDN Serving - Return 404 for valid page',
   function (test) {
-    var status;
-    var cdn = "https://www.cloudfront.com/";
-    var root = "https://www.meteor.com/";
+    const cdn = "https://www.cloudfront.com/";
+    const root = "https://www.meteor.com/";
     CONTROLLER._setRootUrl(root);
     CONTROLLER._setCdnUrl(cdn);
 
@@ -222,11 +218,10 @@ Tinytest.add(
 Tinytest.add(
   'Server Side - CDN Serving - Return 404 for missing static',
   function (test) {
-    var status;
-    var cdn = "http://www.cloudfront.com/";
-    var root = "https://www.meteor.com/";
-    var staticUrl1 = cdn + "myimages.js";
-    var staticUrl2 = cdn + "images/myImage.js";
+    const cdn = "http://www.cloudfront.com/";
+    const root = "https://www.meteor.com/";
+    const staticUrl1 = cdn + "myimages.js";
+    const staticUrl2 = cdn + "images/myImage.js";
     CONTROLLER._setRootUrl(root);
     CONTROLLER._setCdnUrl(cdn);
 
@@ -255,10 +250,9 @@ Tinytest.add(
 Tinytest.add(
   'Server Side - CDN Serving - Return 200 for valid static',
   function (test) {
-    var status;
-    var cdn = "https://www.cloudfront.com/";
-    var root = "http://www.meteor.com/";
-    var staticUrl = cdn + "packages/underscore.js";
+    const cdn = "https://www.cloudfront.com/";
+    const root = "http://www.meteor.com/";
+    const staticUrl = cdn + "packages/underscore.js";
 
     CONTROLLER._setRootUrl(root)
     CONTROLLER._setCdnUrl(cdn);
@@ -282,12 +276,11 @@ Tinytest.add(
 Tinytest.add(
   'Server Side - Font Headers - Add headers to font files',
   function (test) {
-    var status;
-    var cdn = "https://www.cloudfront.com/";
-    var root = "http://www.meteor.com/";
-    var fixtures = cdn + "packages/local-test_maxkferg_cdn/tests/fixtures/";
+    const cdn = "https://www.cloudfront.com/";
+    const root = "http://www.meteor.com/";
+    const fixtures = cdn + "packages/local-test_maxkferg_cdn/tests/fixtures/";
 
-    var fonts = [];
+    const fonts = [];
     fonts.push(fixtures + "icomoon.otf");
     fonts.push(fixtures + "icomoon.eot");
     fonts.push(fixtures + "icomoon.svg");
@@ -300,7 +293,7 @@ Tinytest.add(
     req.headers.host = url.parse(cdn).host;
     res.status = 200;
 
-    for (var i=1; i<fonts.length; i++){
+    for (const i=1; i<fonts.length; i++){
       req.url = fonts[i];
       res.headers = {};
       res.nextCalls = nextCalls;
@@ -323,11 +316,10 @@ Tinytest.add(
 Tinytest.add(
   'Server Side - Font Headers - Ignore font query string',
   function (test) {
-    var status;
-    var cdn = "https://www.cloudfront.com/";
-    var root = "http://www.meteor.com/";
-    var fixtures = cdn + "packages/local-test_maxkferg_cdn/tests/fixtures/";
-    var font = fixtures + "icomoon.woff?-acxumy";
+    const cdn = "https://www.cloudfront.com/";
+    const root = "http://www.meteor.com/";
+    const fixtures = cdn + "packages/local-test_maxkferg_cdn/tests/fixtures/";
+    const font = fixtures + "icomoon.woff?-acxumy";
 
     CONTROLLER._setRootUrl(root)
     CONTROLLER._setCdnUrl(cdn);
@@ -350,11 +342,10 @@ Tinytest.add(
 Tinytest.add(
   'Server Side - Font Headers - Negative test',
   function (test) {
-    var status;
-    var cdn = "https://www.cloudfront.com/";
-    var root = "http://www.meteor.com/";
-    var fixtures = cdn + "packages/local-test_maxkferg_cdn/tests/fixtures/";
-    var filepath = fixtures + "icomoon.css";
+    const cdn = "https://www.cloudfront.com/";
+    const root = "http://www.meteor.com/";
+    const fixtures = cdn + "packages/local-test_maxkferg_cdn/tests/fixtures/";
+    const filepath = fixtures + "icomoon.css";
 
     CONTROLLER._setRootUrl(root);
     CONTROLLER._setCdnUrl(cdn);
