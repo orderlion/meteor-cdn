@@ -7,7 +7,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('2.9.0');
+  api.versionsFrom('2.8.2');
   api.export('CDN','server');
   api.export('CDN','client');
   api.use('ecmascript');
